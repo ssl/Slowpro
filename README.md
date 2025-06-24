@@ -63,7 +63,7 @@ The generated HTML report includes:
 - **Failed Requests** - Fix these first
 - **Slowest Domains** - External dependencies to optimize
 
-> View the example report that browsed on GitHub: [example_report.html](https://raw.githubusercontent.com/ssl/Slowpro/main/example_report.html)
+> View the example report that browsed on GitHub: [example_report.html](https://ssl.github.io/cdn/Slowpro/example_report.html) (minimal, JS disabled)
 
 ## 💡 Tips
 

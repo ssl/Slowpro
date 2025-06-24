@@ -983,6 +983,14 @@ class DashboardGenerator:
         
         // Store all data for filtering
         const allRequests = {json.dumps(self.all_data, default=str)};
+        
+        // Sort requests by timestamp (oldest first) for consistent default ordering
+        allRequests.sort((a, b) => {{
+            const timeA = a.timestamp || '';
+            const timeB = b.timestamp || '';
+            return timeA.localeCompare(timeB);
+        }});
+        
         let filteredRequests = [...allRequests];
 
         // Helper function to clean URL display
@@ -1399,9 +1407,12 @@ class DashboardGenerator:
         """Generate all requests table rows server-side"""
         if not self.all_data:
             return "<tr><td colspan='8' class='text-center'>No data available</td></tr>"
+        
+        # Sort requests by timestamp (oldest first)
+        sorted_requests = sorted(self.all_data, key=lambda x: x.get('timestamp', ''))
             
         rows = []
-        for request in self.all_data:
+        for request in sorted_requests:
             status_class = 'status-error' if request.get('status', 200) >= 400 else \
                           'status-warning' if request.get('status', 200) >= 300 else 'status-success'
             
